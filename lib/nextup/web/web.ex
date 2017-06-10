@@ -19,6 +19,11 @@ defmodule Nextup.Web do
   def controller do
     quote do
       use Phoenix.Controller, namespace: Nextup.Web
+
+      alias Nextup.Repo
+      import Ecto
+      import Ecto.Query
+
       import Plug.Conn
       import Nextup.Web.Router.Helpers
       import Nextup.Web.Gettext
@@ -53,6 +58,11 @@ defmodule Nextup.Web do
   def channel do
     quote do
       use Phoenix.Channel
+      
+      alias Nextup.Repo
+      import Ecto
+      import Ecto.Query
+
       import Nextup.Web.Gettext
     end
   end

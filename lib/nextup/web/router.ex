@@ -19,6 +19,14 @@ defmodule Nextup.Web.Router do
     get "/", PageController, :index
   end
 
+  scope "/auth", Nextup.Web do
+    pipe_through :browser
+
+    get "/logout", AuthController, :logout
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Nextup.Web do
   #   pipe_through :api

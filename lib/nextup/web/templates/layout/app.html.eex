@@ -18,21 +18,25 @@
     <header class="header">
       <nav role="navigation" class="blue darken-2">
         <div class="container">
-          <a href="/" class="brand-logo">
-            <i class="material-icons">dialpad</i>
-          </a>
+          <a href="/" class="brand-logo left"><i class="material-icons">dialpad</i></a>
           <ul class="right">
-            <li>
-              <%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %>
-            </li>
+            <%= if @conn.assigns[:user] do %>
+              <li><a href="">Sets</a></li>            
+              <li><a href="">Cards</a></li>
+              <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
+            <% else %>
+              <li><%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %></li>
+            <% end %>
           </ul>
         </div>
       </nav>
     </header>
   
 
-    <p class="alert card-panel blue-text text-darken-2" role="alert"><%= get_flash(@conn, :info) %></p>
-    <p class="alert card-panel blue-text text-darken-2" role="alert"><%= get_flash(@conn, :error) %></p>
+    <div class="container">
+      <p class="alert card-panel blue lighten-3 white-text" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert card-panel red lighten-3 white-text" role="alert"><%= get_flash(@conn, :error) %></p>
+  </div>
 
     <main role="main">
       <%= render @view_module, @view_template, assigns %>

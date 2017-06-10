@@ -28,8 +28,9 @@ import_config "#{Mix.env}.exs"
 
 config :ueberauth, Ueberauth,
   providers: [
-    facebook: { Ueberauth.Strategy.Facebook, [] },
-    github: { Ueberauth.Strategy.Github, [] }
+    facebook: {Ueberauth.Strategy.Facebook, []},
+    google: {Ueberauth.Strategy.Google, []},
+    github: {Ueberauth.Strategy.Github, []}
 ]
 
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,

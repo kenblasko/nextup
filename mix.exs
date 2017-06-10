@@ -38,6 +38,7 @@ defmodule Nextup.Mixfile do
      {:cowboy, "~> 1.0"},
      {:ueberauth_facebook, "~> 0.5"},
      {:ueberauth_github, "~> 0.4"},
+     {:ueberauth_google, "~> 0.5"},
      {:ueberauth, "~> 0.4"}]
   end
 

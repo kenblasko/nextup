@@ -47,6 +47,12 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
+    },
+    sass: {
+      mode: "native", // Think this is node?
+      options: {
+        includePaths: ["node_modules/materialize-css/sass"] // tell sass-brunch where to look for files to @import
+      }
     }
   },
 

@@ -6,6 +6,9 @@
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
+    "install": "^0.10.1",
+    "materialize-css": "^0.98.2",
+    "npm": "^5.0.3",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html"
   },
@@ -13,6 +16,8 @@
     "babel-brunch": "6.0.6",
     "brunch": "2.10.7",
     "clean-css-brunch": "2.10.0",
+    "postcss-brunch": "^2.0.5",
+    "sass-brunch": "^2.10.4",
     "uglify-js-brunch": "2.1.1"
   }
 }

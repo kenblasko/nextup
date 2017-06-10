@@ -7,8 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Nextup!</title>
+    <title>NextUp</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   </head>
 
   <body>
@@ -19,7 +21,6 @@
             <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
           </ul>
         </nav>
-        <span class="logo"></span>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

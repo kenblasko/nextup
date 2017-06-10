@@ -14,23 +14,38 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+
+    <header class="header">
+      <nav role="navigation" class="blue darken-2">
+        <div class="container">
+          <a href="/" class="brand-logo">
+            <i class="material-icons">dialpad</i>
+          </a>
+          <ul class="right">
+            <li>
+              <%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %>
+            </li>
           </ul>
-        </nav>
-      </header>
+        </div>
+      </nav>
+    </header>
+  
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <p class="alert card-panel blue-text text-darken-2" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert card-panel blue-text text-darken-2" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div> <!-- /container -->
+      <footer class="page-footer blue darken-2">
+        <div class="footer-copyright">
+          <div class="container">
+          © 2017 Copyright Text
+          </div>
+        </div>
+      </footer>
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

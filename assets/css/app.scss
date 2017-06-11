@@ -2,11 +2,78 @@
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 /* Phoenix flash messages */
-.alert:empty { 
-    display: none; 
+.alert:empty {
+    display: none;
 }
 
 /* Phoenix inline forms in links and buttons */
-form.link, form.button {
-  display: inline;
+form.link,
+form.button {
+    display: inline;
+}
+
+/* Override materialize form focus color */
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #1976D2;
+    box-shadow: 0 1px 0 0 #1976D2;
+}
+
+.content {
+    padding: 2rem 0;
+    min-height: 60vh;
+}
+
+.redactor-layer.redactor-styles.redactor-in {
+    min-height: 160px !important;
+}
+
+.form-right {
+    float: right;
+    position: relative;
+    top: -35px;
+}
+
+.sortable, 
+.sortable-existing {
+    min-height: 50px;
+}
+
+.sortable-with-icon {
+    display: flex;
+    align-items: center;
+    line-height: 0 !important;
+    i {
+        margin-right: 5px;
+        color: #039BE9;
+    }
+}
+
+.sortable-cursor {
+    cursor: move;
+}
+
+.sortable-order {
+    position: absolute;
+    right: 20px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:empty {
+        display: none;
+    }
 }

@@ -18,16 +18,26 @@
     <header class="header">
       <nav role="navigation" class="blue darken-2">
         <div class="container">
-          <a href="/" class="brand-logo left"><i class="material-icons">dialpad</i></a>
-          <ul class="right">
+          <a href="/" class="brand-logo"><i class="material-icons">dialpad</i>nextUp</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
             <%= if @conn.assigns[:user] do %>
-              <li><a href="">Sets</a></li>            
-              <li><a href="">Cards</a></li>
+              <li><%= link "Sets", to: set_path(@conn, :index) %></li>            
+              <li><%= link "Cards", to: card_path(@conn, :index) %></li>
               <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
             <% else %>
               <li><%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %></li>
             <% end %>
           </ul>
+            <ul class="side-nav" id="mobile-demo">
+            <%= if @conn.assigns[:user] do %>
+              <li><%= link "Sets", to: set_path(@conn, :index) %></li>            
+              <li><%= link "Cards", to: card_path(@conn, :index) %></li>
+              <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
+            <% else %>
+              <li><%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %></li>
+            <% end %>
+            </ul>
         </div>
       </nav>
     </header>
@@ -38,18 +48,24 @@
       <p class="alert card-panel red lighten-3 white-text" role="alert"><%= get_flash(@conn, :error) %></p>
   </div>
 
-    <main role="main">
+    <main role="main" class="content container">
       <%= render @view_module, @view_template, assigns %>
     </main>
 
-      <footer class="page-footer blue darken-2">
-        <div class="footer-copyright">
-          <div class="container">
+    <footer class="page-footer blue darken-2">
+      <div class="footer-copyright">
+        <div class="container">
           © 2017 Copyright Text
-          </div>
+          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
-      </footer>
+      </div>
+    </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+     <%= if assigns[:vendor] do %>
+      <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
+    <% end %>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-defmodule Nextup.Plugs.RequireAuth do
+defmodule Nextup.Web.Plugs.RequireAuth do
   import Plug.Conn
   import Phoenix.Controller
 

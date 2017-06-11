@@ -7,8 +7,9 @@ defmodule Nextup.Web.AuthController do
   def signin(conn, changeset) do
     case insert_or_update_user(changeset) do
       {:ok, user} -> 
+        name = user.name |> String.split |> List.first
         conn
-          |> put_flash(:info, "Welcome back!")
+          |> put_flash(:info, "Welcome back, #{name}!")
           |> put_session(:user_id, user.id)
           |> redirect(to: page_path(conn, :index))
       {:error, _reason} -> 

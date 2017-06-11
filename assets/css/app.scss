@@ -77,3 +77,11 @@ textarea.materialize-textarea:focus:not([readonly]) {
         display: none;
     }
 }
+
+.carousel.card {
+    border-radius: 0;
+}
+
+.indicators {
+    background-color: #90CAF9 !important;
+}

@@ -18,6 +18,8 @@ defmodule Nextup.Web.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/sets", SetController
+    resources "/cards", CardController
   end
 
   scope "/auth", Nextup.Web do

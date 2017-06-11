@@ -21,18 +21,18 @@
           <a href="/" class="brand-logo"><i class="material-icons">dialpad</i>nextUp</a>
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
-            <%= if @conn.assigns[:user] do %>
-              <li><%= link "Sets", to: set_path(@conn, :index) %></li>            
+              <li><%= link "Sets", to: set_path(@conn, :index) %></li>  
               <li><%= link "Cards", to: card_path(@conn, :index) %></li>
+            <%= if @conn.assigns[:user] do %>
               <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
             <% else %>
               <li><%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %></li>
             <% end %>
           </ul>
             <ul class="side-nav" id="mobile-demo">
-            <%= if @conn.assigns[:user] do %>
-              <li><%= link "Sets", to: set_path(@conn, :index) %></li>            
+              <li><%= link "Sets", to: set_path(@conn, :index) %></li>    
               <li><%= link "Cards", to: card_path(@conn, :index) %></li>
+            <%= if @conn.assigns[:user] do %>
               <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
             <% else %>
               <li><%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %></li>

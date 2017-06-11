@@ -3,15 +3,41 @@
 <%= link "Back", to: set_path(@conn, :index), class: "btn blue lighten-5 blue-text" %>
 
 <div class="card-panel">
-  <%= @set.body %>  
-  <% if Enum.count(@sorted_cards) > 0 do %>
-    <ul class="collection with-header">
-      <li class="collection-header">This set has the following cards:</li>
-      <% for card <- @sorted_cards do %>
-        <li class="collection-item"><%= card.title %></li>
-      <% end %>
-    </ul>
+  <h5 class="card-title thin"><%= @set.body %></h5>
+  <%= if Enum.count(@sorted_cards) > 0 do %>  
+    <div class="carousel card blue lighten-4">
+      <div class="card-content">
+        <%= for card <- @sorted_cards do %>
+          <a class="card carousel-item" href="#modal<%= card.id%>">
+            <h5 class="card-title thin center"><%= card.title %></h5>
+            <p class="center"><i class="material-icons large">pageview</i></p>
+          </a>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <p class="card-content">There are no cards on this set.</p>
   <% end %>
 </div>
 
-<%= link "Edit", to: set_path(@conn, :edit, @set), class: "btn blue" %>
+<%= if @conn.assigns[:user] && @conn.assigns[:user].id == @set.user.id do %>
+  <%= link "Edit", to: set_path(@conn, :edit, @set), class: "btn blue" %>
+<% end %>
+
+<%= if Enum.count(@sorted_cards) > 0 do %>  
+  <%= for card <- @sorted_cards do %>
+    <div id="modal<%= card.id %>" class="modal">
+      <div class="modal-content">
+        <a href="#!" class="modal-action modal-close right"><i class="material-icons">close</i></a>
+        <h4><%= card.title %></h4>
+        <p><%= raw(card.body) %></p>
+        <%= if @conn.assigns[:user] && @conn.assigns[:user].id == card.user.id do %>
+          <%= link to: card_path(@conn, :edit, card), class: "btn blue", target: "_blank" do %>
+            <span>Edit<i class="material-icons">open_in_new</i></span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+  

@@ -6,15 +6,17 @@
         <strong><%= set.title %></strong> added by: <%= set.user.name %>
         <span href="#!" class="secondary-content">
             <span><%= link "View", to: set_path(@conn, :show, set) %></span>
-            <span><%= link "Edit", to: set_path(@conn, :edit, set) %></span>
+            <%= if @conn.assigns[:user] && @conn.assigns[:user].id == set.user.id do %>
+              <span><%= link "Edit", to: set_path(@conn, :edit, set) %></span>
+            <% end %>
         </span>
       </div>
     </li>
   <% end %>
 </ul>
 
-<span>
+<%= if @conn.assigns[:user] do %>
   <%= link to: set_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light blue" do %>
     <i class="material-icons">add</i>
   <% end %>
-</span>
+<% end %>

@@ -4,14 +4,16 @@
 
 <div class="card-panel">
   <%= raw(@card.body) %>
-  <ul class="collection with-header">
-    <li class="collection-header">Associated Sets:</li>
-    <%= for set <- @card.sets do %>
-      <li class="collection-item">
-        <%= link to: set_path(@conn, :show, set) do %><%= set.title %><% end %>
-      </li>
-    <% end %>
-  </ul>
+  <%= if (length @card.sets) > 0 do %>  
+    <ul class="collection with-header">
+      <li class="collection-header">Associated Sets:</li>
+      <%= for set <- @card.sets do %>
+        <li class="collection-item">
+          <%= link to: set_path(@conn, :show, set) do %><%= set.title %><% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>
 
 <%= if @conn.assigns[:user] && @conn.assigns[:user].id == @card.user.id do %>

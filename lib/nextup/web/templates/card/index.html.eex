@@ -6,20 +6,19 @@
       <div class="card small">
         <div class="card-content">
           <span class="card-title"><%= card.title %></span>
-          <p><%= raw(card.body) %></p>
-          <%= if Enum.count(card.sets) > 0 do %>
+          <%= if (length card.sets) > 0 do %>
             <ul class="collection with-header">
               <li class="collection-header"><h6>Sets</h6></li>
-                <%= for set <- card.sets do %>
-                  <li class="collection-item"><%= set.title %></li>
-                <% end %>
+              <%= for set <- card.sets do %>
+                <li class="collection-item"><%= link to: set_path(@conn, :show, set) do %><%= set.title %><% end %></li>
+              <% end %>
             </ul>
           <% end %>
         </div>
-        <div class="card-action">
+        <div class="card-action center">
           <%= link "View", to: card_path(@conn, :show, card), class: "blue-text" %>
           <%= if @conn.assigns[:user] && @conn.assigns[:user].id == card.user.id do %>
-            <%= link "Edit", to: card_path(@conn, :edit, card), class: "blue-text" %>
+            <%= link "Edit", to: card_path(@conn, :edit, card), class: "blue-text last" %>
           <% end %>
         </div>
       </div>

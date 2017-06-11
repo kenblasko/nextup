@@ -22,14 +22,14 @@
       <div class="col s12 m6">
         <h6>Cards on this set: <span class="right">Order</span></h6>
         <ul class="collection sortable-existing">
-          <%= for card <- @existing_cards do %>
+          <%= for {card, idx} <- Enum.with_index(@existing_cards) do %>
             <li class="collection-item sortable-cursor sortable-with-icon">
               <i class="material-icons">drag_handle</i>
               <%= link card.title, to: card_path(@conn, :show, card), target: "_blank" %>
-              <span class="right sortable-order blue white-text"><%= "idx" %></span>
+              <span class="right sortable-order blue white-text"><%= idx + 1 %></span>
               <%= hidden_input f, :card_ids, name: "set[cards][ids][]", id: "set_cards_id", value: card.id %>
             </li>
-          <% end %>
+            <% end %>
         </ul>
       </div>
 

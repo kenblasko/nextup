@@ -18,7 +18,7 @@
         </div>
         <div class="card-action">
           <%= link "View", to: card_path(@conn, :show, card), class: "blue-text" %>
-          <%= if @conn.assigns[:user] && @conn.assigns[:user].id == @set.user.id do %>
+          <%= if @conn.assigns[:user] && @conn.assigns[:user].id == card.user.id do %>
             <%= link "Edit", to: card_path(@conn, :edit, card), class: "blue-text" %>
           <% end %>
         </div>
@@ -28,7 +28,7 @@
 </div>  
 
 <%= if @conn.assigns[:user] do %>
-  <%= link to: card_path(@conn, :new), class: "floating right btn-floating btn-large waves-effect waves-light blue" do %>
+  <%= link to: card_path(@conn, :new), class: "floating btn-floating btn-large waves-effect waves-light blue" do %>
     <i class="material-icons">add</i>
   <% end %>
 <% end %>

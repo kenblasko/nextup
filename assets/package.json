@@ -10,7 +10,8 @@
     "materialize-css": "^0.98.2",
     "npm": "^5.0.3",
     "phoenix": "file:../deps/phoenix",
-    "phoenix_html": "file:../deps/phoenix_html"
+    "phoenix_html": "file:../deps/phoenix_html",
+    "sortablejs": "^1.6.0"
   },
   "devDependencies": {
     "babel-brunch": "6.0.6",

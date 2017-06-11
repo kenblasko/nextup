@@ -1,4 +1,4 @@
 <div class="container">
-  <h2><%= gettext "Welcome to %{name}!", name: "NextUp" %></h2>
-  <p class="card-panel">A turn tracker app.  Login to get started.</p>
+  <h1 class="thin center"><%= gettext "Welcome to %{name}!", name: "NextUp" %></h1>
+  <p class="card-panel center">A turn tracker app.  Login to get started.</p>
 </div>

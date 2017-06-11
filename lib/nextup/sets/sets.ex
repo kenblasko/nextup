@@ -35,7 +35,7 @@ defmodule Nextup.Sets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_card!(id), do: Repo.get!(Card, id) |> Repo.preload([:sets])
+  def get_card!(id), do: Repo.get!(Card, id) |> Repo.preload([:sets, :user])
 
   @doc """
   Creates a card.
@@ -132,7 +132,7 @@ defmodule Nextup.Sets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_set!(id), do: Repo.get!(Set, id) |> Repo.preload([:cards])
+  def get_set!(id), do: Repo.get!(Set, id) |> Repo.preload([:cards, :user])
 
   @doc """
   Creates a set.
@@ -203,13 +203,13 @@ defmodule Nextup.Sets do
 
   def cards_not_in(set \\ %Set{}) do
     ids = set.cards |> Enum.map(&(&1.id))
-    Card |> where([c], not(c.id in ^ids)) |> Repo.all
+    Card |> preload(:user) |> where([c], not(c.id in ^ids)) |> Repo.all
   end
 
   def sort_cards(set) do
     order = set.order
     case order do
-       nil -> set.cards
+       nil -> set.cards |> Repo.preload(:user)
        order -> order
           |> String.split(",")
           |> Enum.map(fn(id) -> 
@@ -217,6 +217,7 @@ defmodule Nextup.Sets do
               card.id == String.to_integer(id)
             end) 
           end)
+          |> Repo.preload(:user)
     end
   end
 

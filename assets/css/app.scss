@@ -30,6 +30,10 @@ textarea.materialize-textarea:focus:not([readonly]) {
     box-shadow: 0 1px 0 0 #1976D2;
 }
 
+.brand-logo i {
+    line-height: 64px !important;
+}
+
 .content {
     padding: 2rem 0;
     min-height: 60vh;
@@ -66,9 +70,10 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .sortable-order {
     position: absolute;
-    right: 20px;
-    height: 25px;
-    width: 25px;
+    right: 10px;
+    height: 30px;
+    width: 30px;
+    font-size: 16px;
     border-radius: 50%;
     display: flex;
     align-items: center;

@@ -19,7 +19,7 @@ defmodule Nextup.Sets.Card do
   @doc false
   def changeset(%Card{} = card, attrs) do
     card
-    |> cast(attrs, [:title, :body])
+    |> cast(attrs, [:title, :body, :user_id])
     |> validate_required([:title, :body])
   end
 end

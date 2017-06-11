@@ -18,7 +18,7 @@ defmodule Nextup.Sets do
 
   """
   def list_cards do
-    Repo.all(Card)
+    Repo.all(Card) |> Repo.preload([:sets, :user])
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule Nextup.Sets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_card!(id), do: Repo.get!(Card, id)
+  def get_card!(id), do: Repo.get!(Card, id) |> Repo.preload([:sets])
 
   @doc """
   Creates a card.
@@ -49,8 +49,9 @@ defmodule Nextup.Sets do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_card(attrs \\ %{}) do
-    %Card{}
+  def create_card(attrs \\ %{}, user) do
+    user
+    |> Ecto.build_assoc(:cards)
     |> Card.changeset(attrs)
     |> Repo.insert()
   end
@@ -114,7 +115,7 @@ defmodule Nextup.Sets do
 
   """
   def list_sets do
-    Repo.all(Set)
+    Repo.all(Set) |> Repo.preload([:cards, :user])
   end
 
   @doc """
@@ -131,7 +132,7 @@ defmodule Nextup.Sets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_set!(id), do: Repo.get!(Set, id)
+  def get_set!(id), do: Repo.get!(Set, id) |> Repo.preload([:cards])
 
   @doc """
   Creates a set.
@@ -145,8 +146,9 @@ defmodule Nextup.Sets do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_set(attrs \\ %{}) do
-    %Set{}
+  def create_set(attrs \\ %{}, user) do
+    user
+    |> Ecto.build_assoc(:sets)
     |> Set.changeset(attrs)
     |> Repo.insert()
   end
@@ -195,6 +197,27 @@ defmodule Nextup.Sets do
 
   """
   def change_set(%Set{} = set) do
-    Set.changeset(set, %{})
+    Set.changeset(set)
   end
+
+
+  def cards_not_in(set \\ %Set{}) do
+    ids = set.cards |> Enum.map(&(&1.id))
+    Card |> where([c], not(c.id in ^ids)) |> Repo.all
+  end
+
+  def sort_cards(set) do
+    order = set.order
+    case order do
+       nil -> set.cards
+       order -> order
+          |> String.split(",")
+          |> Enum.map(fn(id) -> 
+            Enum.find(set.cards, fn(card) -> 
+              card.id == String.to_integer(id)
+            end) 
+          end)
+    end
+  end
+
 end

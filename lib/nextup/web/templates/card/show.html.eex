@@ -1,0 +1,17 @@
+<h2 class="thin center"><%= @card.title %></h2>
+
+<%= link "Back", to: card_path(@conn, :index), class: "btn blue lighten-5 blue-text" %>
+
+<div class="card-panel">
+  <%= raw(@card.body) %>  
+  <% if Enum.count(@card.sets) > 0 do %>
+    <ul class="collection with-header">
+      <li class="collection-header">This card belongs to the following sets:</li>
+      <% for set <- @card.sets do %>
+        <li class="collection-item"><%= set.title %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<%= link "Edit", to: card_path(@conn, :edit, @card), class: "btn blue" %>

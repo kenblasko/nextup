@@ -1,0 +1,18 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+  <div class="input-field">
+    <%= text_input f, :title %>
+    <%= label f, :title, class: "active" %>
+  </div>
+  <div class="input-field">
+    <%= textarea f, :body, class: "materialize-textarea" %>
+    <%= label f, :body, class: "active" %>
+  </div>
+  <div class="input-field">
+    <%= submit "Submit", class: "btn blue" %>
+  </div>
+<% end %>

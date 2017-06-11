@@ -1,0 +1,12 @@
+<h2>Edit <%= @card.title %></h2>
+
+<%= link "Back", to: card_path(@conn, :index), class: "btn blue lighten-5 blue-text" %>
+
+<%= render "form.html", changeset: @changeset,
+                        action: card_path(@conn, :update, @card) %>
+
+<%= link "Delete", 
+  to: card_path(@conn, :delete, @card), 
+  method: :delete,
+  data: [confirm: "Are you sure?"], 
+  class: "btn red lighten-2 form-right" %>

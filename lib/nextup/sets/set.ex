@@ -14,7 +14,7 @@ defmodule Nextup.Sets.Set do
     field :order, :string
 
     belongs_to :user, User
-    many_to_many :cards, Card, join_through: "sets_cards", on_replace: :delete
+    many_to_many :cards, Card, join_through: "sets_cards", on_delete: :delete_all,on_replace: :delete
 
     timestamps()
   end

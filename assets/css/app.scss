@@ -1,16 +1,21 @@
 @import "materialize";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
 /* Phoenix flash messages */
 
 .alert:empty {
     display: none;
 }
+
+
 /* Phoenix inline forms in links and buttons */
 
 form.link,
 form.button {
     display: inline;
 }
+
+
 /* Override materialize form focus color */
 
 input:not([type]):focus:not([readonly]),
@@ -58,6 +63,10 @@ $headerHeight: 64px;
     top: -35px;
 }
 
+.sortable-cursor {
+    cursor: move;
+}
+
 .sortable,
 .sortable-existing {
     min-height: 50px;
@@ -85,6 +94,13 @@ $headerHeight: 64px;
     justify-content: center;
     &:empty {
         display: none;
+    }
+}
+
+.carousel {
+    height: 460px;
+    @media only screen and (min-width: 601px) {
+        height: 600px;
     }
 }
 

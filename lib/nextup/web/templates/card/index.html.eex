@@ -1,34 +1,39 @@
-<h2>Cards</h2>
+<%= render "banner.html", title: "Cards" %>
 
-<div class="row">
-  <%= for card <- @cards do %>
-    <div class="col s12 m6 l4">
-      <div class="card small">
-        <div class="card-content">
-          <span class="card-title"><%= card.title %></span>
-          <%= if (length card.sets) > 0 do %>
-            <ul class="collection with-header">
-              <li class="collection-header"><h6>Sets</h6></li>
-              <%= for set <- card.sets do %>
-                <li class="collection-item"><%= link to: set_path(@conn, :show, set) do %><%= set.title %><% end %></li>
-              <% end %>
-            </ul>
-          <% end %>
-        </div>
-        <div class="card-action center">
-          <%= link "View", to: card_path(@conn, :show, card), class: "blue-text" %>
-          <%= if @conn.assigns[:user] && @conn.assigns[:user].id == card.user.id do %>
-            <%= link "Edit", to: card_path(@conn, :edit, card), class: "blue-text last" %>
-          <% end %>
+<div class="container section">
+
+  <div class="row">
+    <%= for card <- @cards do %>
+      <div class="col s12 m6 l4">
+        <div class="card small">
+          <div class="card-content">
+            <span class="card-title"><%= card.title %></span>
+            <%= if (length card.sets) > 0 do %>
+              <ul class="collection with-header">
+                <li class="collection-header"><h6>Sets</h6></li>
+                <%= for set <- card.sets do %>
+                  <li class="collection-item"><%= link to: set_path(@conn, :show, set) do %><%= set.title %><% end %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+          <div class="card-action center">
+            <%= link "View", to: card_path(@conn, :show, card), class: "blue-text" %>
+            <%= if @conn.assigns[:user] && @conn.assigns[:user].id == card.user.id do %>
+              <%= link "Edit", to: card_path(@conn, :edit, card), class: "blue-text last" %>
+            <% end %>
+          </div>
         </div>
       </div>
+    <% end %>
+  </div>  
+
+  <%= if @conn.assigns[:user] do %>
+    <div class="section right-align">
+      <%= link to: card_path(@conn, :new), class: "floating btn-floating btn-large waves-effect waves-light blue" do %>
+        <i class="material-icons">add</i>
+      <% end %>
     </div>
   <% end %>
-</div>  
 
-<%= if @conn.assigns[:user] do %>
-  <%= link to: card_path(@conn, :new), class: "floating btn-floating btn-large waves-effect waves-light blue" do %>
-    <i class="material-icons">add</i>
-  <% end %>
-<% end %>
-
+</div>

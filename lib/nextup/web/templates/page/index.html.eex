@@ -1,4 +1,64 @@
-<div class="container">
-  <h1 class="thin center"><%= gettext "Welcome to %{name}!", name: "NextUp" %></h1>
-  <p class="card-panel center">A turn tracker app.  Login to get started.</p>
-</div>
+<section class="section-large valign-wrapper blue lighten-5">
+  <div class="container">
+    <h1 class="thin blue-text text-accent-4">Welcome to nextUp.</h1>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">A turn tracker app.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-large white">
+    <div class="container">
+      <h2 class="thin center">Test</h2>
+      <div class="row">
+    
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-content center">
+              <h4 class="card-title">Card 1 Title</h4>
+              <i class="material-icons medium blue-text">reorder</i>
+              <p class="section">Some descripive Text</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-content center">
+              <h4 class="card-title">Card 1 Title</h4>
+              <i class="material-icons medium blue-text">settings</i>
+              <p class="section">Some descripive Text</p> 
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-content center">
+              <h4 class="card-title">Card 1 Title</h4>
+              <i class="material-icons medium blue-text">view_carousel</i>
+              <p class="section">Some descripive Text</p> 
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>
+
+
+<section class="cta valign-wrapper blue lighten-5 section-large center">
+  <div class="container">
+    <h2 class="thin center">Some Cta Here</h2>
+    <div class="card">
+      <div class="card-content">
+        <h5 class="thin">Some text</h5>
+        <div class="section">
+          <a class="btn blue" href="">button</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

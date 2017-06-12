@@ -1,15 +1,20 @@
-<h2>Edit <%= @set.title %></h2>
+<%= render "banner.html", title: "Edit " <> @set.title %>
 
-<%= link "Back", to: set_path(@conn, :index), class: "btn blue lighten-5 blue-text" %>
+<div class="container section">
 
-<%= render "form.html", changeset: @changeset,
-                        action: set_path(@conn, :update, @set),
-                        cards: @cards,
-                        existing_cards: @sorted_cards,
-                        conn: @conn %>
+  <div class="section">
+    <%= link "Back", to: set_path(@conn, :index), class: "btn blue lighten-5 blue-text" %>
+  </div>
 
-<%= link "Delete", 
-  to: set_path(@conn, :delete, @set), 
-  method: :delete, 
-  data: [confirm: "Are you sure?"], 
-  class: "btn red lighten-2 form-right" %>
+  <%= render "form.html", changeset: @changeset,
+                          action: set_path(@conn, :update, @set),
+                          cards: @cards,
+                          existing_cards: @sorted_cards,
+                          conn: @conn %>
+  <%= link "Delete", 
+    to: set_path(@conn, :delete, @set), 
+    method: :delete, 
+    data: [confirm: "Are you sure?"], 
+    class: "btn red lighten-2 form-right" %>
+
+</div>

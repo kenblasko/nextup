@@ -6,13 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>NextUp</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
   </head>
-
   <body>
 
     <header class="header">
@@ -21,8 +18,12 @@
           <a href="/" class="brand-logo"><i class="material-icons">dialpad</i>nextUp</a>
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
-              <li><%= link "Sets", to: set_path(@conn, :index) %></li>  
-              <li><%= link "Cards", to: card_path(@conn, :index) %></li>
+              <li <%= if @conn.request_path == "/sets" do %>class="active"<% end %>>
+                <%= link "Sets", to: set_path(@conn, :index) %>
+              </li>  
+              <li <%= if @conn.request_path == "/cards" do %>class="active"<% end %>>
+                <%= link "Cards", to: card_path(@conn, :index) %>
+              </li>
             <%= if @conn.assigns[:user] do %>
               <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
             <% else %>
@@ -30,8 +31,12 @@
             <% end %>
           </ul>
             <ul class="side-nav" id="mobile-demo">
-              <li><%= link "Sets", to: set_path(@conn, :index) %></li>    
-              <li><%= link "Cards", to: card_path(@conn, :index) %></li>
+              <li <%= if @conn.request_path == "/sets" do %>class="active"<% end %>>
+                <%= link "Sets", to: set_path(@conn, :index) %>
+              </li>    
+              <li <%= if @conn.request_path == "/cards" do %>class="active"<% end %>>
+                <%= link "Cards", to: card_path(@conn, :index) %>
+              </li>
             <%= if @conn.assigns[:user] do %>
               <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
             <% else %>
@@ -46,9 +51,9 @@
     <div class="container">
       <p class="alert card-panel blue lighten-3 white-text" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert card-panel red lighten-3 white-text" role="alert"><%= get_flash(@conn, :error) %></p>
-  </div>
+    </div>
 
-    <main role="main" class="content container">
+    <main role="main" class="content">
       <%= render @view_module, @view_template, assigns %>
     </main>
 

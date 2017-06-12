@@ -1,9 +1,12 @@
-<h2>New Set</h2>
+<%= render "banner.html", title: "New Set" %>
 
-<%= link "Back", to: set_path(@conn, :index), class: "btn blue lighten-5 blue-text" %>
-
-<%= render "form.html", changeset: @changeset,
-                        action: set_path(@conn, :create),
-                        cards: @cards,
-                        existing_cards: [],
-                        conn: @conn %>
+<div class="container section">
+  <div class="section">
+    <%= link "Back", to: set_path(@conn, :index), class: "btn blue lighten-5 blue-text" %>
+  </div>
+  <%= render "form.html", changeset: @changeset,
+                          action: set_path(@conn, :create),
+                          cards: @cards,
+                          existing_cards: [],
+                          conn: @conn %>
+</div>

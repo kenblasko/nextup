@@ -10,15 +10,13 @@
     <h5 class="card-title thin"><%= @set.body %></h5>
     <%= if (length @sorted_cards) > 0 do %>  
       <div class="carousel card blue lighten-4">
-        <div class="card-content">
-          <%= for {card, idx} <- Enum.with_index(@sorted_cards) do %>
-            <a class="card carousel-item" href="#modal<%= card.id%>">
-              <h5 class="card-title thin center"><%= card.title %></h5>
-              <p class="center"><i class="material-icons large">pageview</i></p>
-              <div class="card-action center">Turn Number <%= idx + 1 %></div>
-            </a>
-          <% end %>
-        </div>
+        <%= for {card, idx} <- Enum.with_index(@sorted_cards) do %>
+          <a class="card carousel-item" href="#modal<%= card.id%>">
+            <h5 class="card-title thin center"><%= card.title %></h5>
+            <p class="center"><i class="material-icons large">pageview</i></p>
+            <div class="card-action center">Turn Number <%= idx + 1 %></div>
+          </a>
+        <% end %>
       </div>
     <% else %>
       <p class="card-content">There are no cards on this set.</p>

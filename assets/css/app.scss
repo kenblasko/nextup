@@ -1,18 +1,18 @@
 @import "materialize";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
-
 /* Phoenix flash messages */
+
 .alert:empty {
     display: none;
 }
-
 /* Phoenix inline forms in links and buttons */
+
 form.link,
 form.button {
     display: inline;
 }
-
 /* Override materialize form focus color */
+
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]),
@@ -30,13 +30,22 @@ textarea.materialize-textarea:focus:not([readonly]) {
     box-shadow: 0 1px 0 0 #1976D2;
 }
 
-.brand-logo i {
-    line-height: 64px !important;
+$footerHeight: 70px;
+$headerHeightMobile: 56px;
+$headerHeight: 64px;
+.brand-logo {
+    i {
+        @media only screen and (min-width: 601px) {
+            line-height: $headerHeight !important;
+        }
+    }
 }
 
 .content {
-    padding: 2rem 0;
-    min-height: 60vh;
+    min-height: calc(100vh - (#{$footerHeight} + #{$headerHeightMobile}));
+    @media only screen and (min-width: 601px) {
+        min-height: calc(100vh - (#{$footerHeight} + #{$headerHeight}));
+    }
 }
 
 .redactor-layer.redactor-styles.redactor-in {
@@ -49,7 +58,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
     top: -35px;
 }
 
-.sortable, 
+.sortable,
 .sortable-existing {
     min-height: 50px;
 }
@@ -62,10 +71,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
         margin-right: 5px;
         color: #039BE9;
     }
-}
-
-.sortable-cursor {
-    cursor: move;
 }
 
 .sortable-order {
@@ -93,4 +98,8 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .last {
     margin-right: 0 !important;
+}
+
+.section-large {
+    padding: 4rem 0;
 }

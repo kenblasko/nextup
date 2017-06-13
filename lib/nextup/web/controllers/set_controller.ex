@@ -50,7 +50,7 @@ defmodule Nextup.Web.SetController do
     render(conn, "edit.html", set: set, changeset: changeset, cards: cards, sorted_cards: sorted_cards, vendor: true)
   end
 
-  def update(conn, %{"id" => id, "set" => set_params} = params) do
+  def update(conn, %{"id" => id, "set" => set_params}) do
     set = Sets.get_set!(id)
     case Sets.update_set(set, set_params) do
       {:ok, set} ->

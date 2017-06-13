@@ -3,7 +3,6 @@ defmodule Nextup.Web.CardController do
 
   alias Nextup.Sets
   alias Nextup.Sets.Card
-  alias Nextup.Sets.Set
 
   plug Nextup.Web.Plugs.RequireAuth when action in [
     :new, :create, :edit, :update, :delete

@@ -78,4 +78,16 @@ defmodule Nextup.Web.CardController do
     end
   end
 
+  def duplicate(%{assigns: %{user: user}} = conn, %{"id" => id}) do
+    card = Sets.get_card!(id) 
+    case Sets.create_card(%{"title": card.title, "body": card.body}, user) do
+      {:ok, card} ->
+        conn
+        |> put_flash(:info, "Card duplicated successfully.")
+        |> redirect(to: card_path(conn, :show, card))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", card: card, changeset: changeset, vendor: true)
+    end
+  end
+
 end

@@ -60,7 +60,15 @@ $headerHeight: 64px;
 .form-right {
     float: right;
     position: relative;
-    top: -35px;
+    top: -36px;
+}
+
+.form-left {
+    position: relative;
+    top: -36px;
+    &.with-space {
+        left: 120px;
+    }
 }
 
 .sortable-cursor {

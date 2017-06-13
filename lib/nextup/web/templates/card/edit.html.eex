@@ -12,7 +12,7 @@
     to: card_path(@conn, :duplicate, @card),
     method: :duplicate,
     data: [confirm: "Are you sure?"], 
-    class: "btn blue lighten-3 form-right" %>
+    class: "btn blue lighten-3 form-left with-space" %>
 
   <%= link "Delete", 
     to: card_path(@conn, :delete, @card), 

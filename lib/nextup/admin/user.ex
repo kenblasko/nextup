@@ -4,6 +4,7 @@ defmodule Nextup.Admin.User do
   alias Nextup.Admin.User
   alias Nextup.Sets.Set
   alias Nextup.Sets.Card
+  alias Nextup.Sets.Group
 
   schema "users" do
     field :email, :string
@@ -13,6 +14,7 @@ defmodule Nextup.Admin.User do
     field :providerUID, :string # This will be our unique identifier for facebook oauth
     field :token, :string
 
+    has_many :groups, Group
     has_many :sets, Set
     has_many :cards, Card
 

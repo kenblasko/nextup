@@ -19,7 +19,7 @@ defmodule Nextup.Web.SetController do
 
   def new(conn, _params) do
     changeset = Sets.change_set(%Nextup.Sets.Set{})
-    cards = Sets.list_cards()
+    cards = Sets.list_cards(conn.assigns.user)
     render(conn, "new.html", changeset: changeset, cards: cards, vendor: true)
   end
 
@@ -30,7 +30,7 @@ defmodule Nextup.Web.SetController do
         |> put_flash(:info, "Set created successfully.")
         |> redirect(to: set_path(conn, :show, set))
       {:error, %Ecto.Changeset{} = changeset} ->
-        cards = Sets.list_cards()
+        cards = Sets.list_cards(user)
         render(conn, "new.html", changeset: changeset, cards: cards, vendor: true)
     end
     conn

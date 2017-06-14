@@ -21,6 +21,12 @@ defmodule Nextup.Sets do
     Repo.all(Card) |> Repo.preload([:sets, :user])
   end
 
+
+  def list_cards(user) do
+    id = user.id
+    Card |> preload([:sets, :user]) |> where([c], c.user_id == ^id) |> Repo.all
+  end
+
   @doc """
   Gets a single card.
 
@@ -202,8 +208,9 @@ defmodule Nextup.Sets do
 
 
   def cards_not_in(set \\ %Set{}) do
+    user_id = set.user.id
     ids = set.cards |> Enum.map(&(&1.id))
-    Card |> preload(:user) |> where([c], not(c.id in ^ids)) |> Repo.all
+    Card |> preload(:user) |> where([c], not(c.id in ^ids)) |> where([c], c.user_id == ^user_id) |> Repo.all
   end
 
   def sort_cards(set) do

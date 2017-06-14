@@ -13,7 +13,7 @@ defmodule Nextup.Web.CardController do
   ]
 
   def index(conn, _params) do
-    cards = Sets.list_cards()
+    cards = Sets.list_cards
     render(conn, "index.html", cards: cards)
   end
 

@@ -20,6 +20,7 @@ defmodule Nextup.Web.Router do
     get "/", PageController, :index
     resources "/sets", SetController
     resources "/cards", CardController
+    resources "/groups", GroupController
     post "/cards/duplicate/:id", CardController, :duplicate
   end
 

@@ -1,0 +1,29 @@
+<%= render "banner.html", title: "Groups" %>
+
+<div class="container section">
+
+  <ul class="collection">
+    <%= for group <- @groups do %>
+      <li class="collection-item">
+        <div>
+          <strong><%= group.title %></strong> added by: <%= group.user.name %>
+          <span href="#!" class="secondary-content">
+              <span><%= link "View", to: group_path(@conn, :show, group) %></span>
+              <%= if @conn.assigns[:user] && @conn.assigns[:user].id == group.user.id do %>
+                <span><%= link "Edit", to: group_path(@conn, :edit, group) %></span>
+              <% end %>
+          </span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= if @conn.assigns[:user] do %>
+    <div class="section right-align">
+      <%= link to: group_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light blue" do %>
+        <i class="material-icons">add</i>
+      <% end %>
+    </div>
+  <% end %>
+
+</div>

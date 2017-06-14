@@ -1,0 +1,11 @@
+<%= render "banner.html", title: "Add Group" %>
+
+<div class="container section">
+
+  <div class="section">
+    <%= link "Back", to: group_path(@conn, :index), class: "btn blue lighten-5 blue-text" %>
+  </div>
+
+  <%= render "form.html", changeset: @changeset,
+                        action: group_path(@conn, :create) %>
+</div>

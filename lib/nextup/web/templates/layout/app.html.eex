@@ -18,6 +18,9 @@
           <a href="/" class="brand-logo"><i class="material-icons">dialpad</i>nextUp</a>
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
+              <li <%= if @conn.request_path == "/groups" do %>class="active"<% end %>>
+                <%= link "Groups", to: group_path(@conn, :index) %>
+              </li>
               <li <%= if @conn.request_path == "/sets" do %>class="active"<% end %>>
                 <%= link "Sets", to: set_path(@conn, :index) %>
               </li>  
@@ -31,6 +34,9 @@
             <% end %>
           </ul>
             <ul class="side-nav" id="mobile-demo">
+              <li <%= if @conn.request_path == "/groups" do %>class="active"<% end %>>
+                <%= link "Groups", to: group_path(@conn, :index) %>
+              </li>
               <li <%= if @conn.request_path == "/sets" do %>class="active"<% end %>>
                 <%= link "Sets", to: set_path(@conn, :index) %>
               </li>    

@@ -1,0 +1,27 @@
+<%= render "banner.html", title: @group.title %>
+
+<div class="container section">
+
+  <div class="section">
+    <%= link "Back", to: group_path(@conn, :index), class: "btn blue lighten-5 blue-text" %>
+  </div>
+
+  <div class="card-panel">
+    <%= @group.body %>
+    <%= if (length @group.sets) > 0 do %>  
+      <ul class="collection with-header">
+        <li class="collection-header">Associated Sets:</li>
+        <%= for set <- @group.sets do %>
+          <li class="collection-item">
+            <%= link to: set_path(@conn, :show, set) do %><%= set.title %><% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <%= if @conn.assigns[:user] && @conn.assigns[:user].id == @group.user.id do %>
+    <%= link "Edit", to: group_path(@conn, :edit, @group), class: "btn blue" %>
+  <% end %>
+  
+</div>

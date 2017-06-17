@@ -48,8 +48,6 @@ function handleSocket($el, cardId) {
     let $modal = $('#modal' + cardId) 
 
     channel.join()
-        .receive("ok", resp => console.log("Joined successfully", resp))
-        .receive("error", resp => console.log("Unable to join", resp))
 
     channel.on("card_saved", (payload) => {
         $modal.find('.modal-content-text').html(payload.body)

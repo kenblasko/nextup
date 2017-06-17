@@ -32,11 +32,21 @@
         <div class="modal-content">
           <a href="#!" class="modal-action modal-close right"><i class="material-icons">close</i></a>
           <h4><%= card.title %></h4>
-          <p><%= raw(card.body) %></p>
+          <article class="modal-content-text active"><%= raw(card.body) %></article>
           <%= if @conn.assigns[:user] && @conn.assigns[:user].id == card.user.id do %>
-            <%= link to: card_path(@conn, :edit, card), class: "btn blue", target: "_blank" do %>
-              <span>Edit<i class="material-icons">open_in_new</i></span>
-            <% end %>
+            <div class="modal-textarea input-field">
+              <label class="active" for="body"></label>
+              <textarea class="materialize-textarea" name="card[body]" id="body"><%= card.body %></textarea>
+
+            </div>
+            <div class="section">
+              <button class="js-card-submit btn btn-floating blue waves-effect" id="<%= card.id %>">
+                <i class="material-icons">check</i>
+              </button>
+              <button class="js-card-edit btn btn-floating blue waves-effect" id="<%= card.id %>">
+                <i class="material-icons">edit</i>
+              </button>
+            </div>
           <% end %>
         </div>
       </div>

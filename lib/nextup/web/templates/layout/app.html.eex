@@ -72,6 +72,9 @@
       </div>
     </footer>
 
+    <%= if assigns[:user] do %>
+      <script>window.userToken = "<%= assigns[:user_token] %>";</script>
+    <% end %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
      <%= if assigns[:vendor] do %>

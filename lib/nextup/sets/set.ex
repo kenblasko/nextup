@@ -12,7 +12,7 @@ defmodule Nextup.Sets.Set do
   schema "sets" do
     field :title, :string
     field :body, :string
-    field :order, :string
+    field :order, :map
 
     belongs_to :user, User
     belongs_to :group, Group
@@ -24,19 +24,22 @@ defmodule Nextup.Sets.Set do
   @doc false
   def changeset(%Set{} = set, attrs \\ %{}) do
     card_ids = if attrs["cards"]["ids"], do: attrs["cards"]["ids"], else: []
+    card_priorities = if attrs["cards"]["priorities"], do: attrs["cards"]["priorities"], else: []
+
     set
-    |> cast(attrs, [:title, :body, :user_id])
-    |> cast(build_order(card_ids), [:order])
-    |> put_assoc(:cards, get_cards(card_ids))
-    |> validate_required([:title, :body])
+      |> cast(attrs, [:title, :body, :user_id])
+      |> cast(build_order(card_ids, card_priorities), [:order])
+      |> put_assoc(:cards, get_cards(card_ids))
+      |> validate_required([:title, :body])
   end
 
   defp get_cards(ids) do
-    Card |> where([c], c.id in ^ids) |> Repo.all
+    Card 
+      |> where([c], c.id in ^ids) 
+      |> Repo.all
   end
 
-  defp build_order(ids) do
-    # will be comma separated ids 2,5,6,1
-    %{"order" => Enum.join(ids, ",")}
+  defp build_order(priorities, ids) do
+    %{"order" => Enum.zip(priorities, ids) |> Enum.into(%{})}
   end
 end

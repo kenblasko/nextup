@@ -43,6 +43,8 @@ defmodule Nextup.Sets do
   """
   def get_card!(id), do: Repo.get!(Card, id) |> Repo.preload([:sets, :user])
 
+  def get_card_without_preload!(id), do: Repo.get!(Card, id)
+
   @doc """
   Creates a card.
 
@@ -210,21 +212,25 @@ defmodule Nextup.Sets do
   def cards_not_in(set \\ %Set{}) do
     user_id = set.user.id
     ids = set.cards |> Enum.map(&(&1.id))
-    Card |> preload(:user) |> where([c], not(c.id in ^ids)) |> where([c], c.user_id == ^user_id) |> Repo.all
+    Card 
+      |> preload(:user) 
+      |> where([c], not(c.id in ^ids)) 
+      |> where([c], c.user_id == ^user_id) 
+      |> Repo.all
   end
 
   def sort_cards(set) do
+    cards = set.cards |> Repo.preload(:user)
     order = set.order
     case order do
-       nil -> set.cards |> Repo.preload(:user)
-       order -> order
-          |> String.split(",")
-          |> Enum.map(fn(id) -> 
-            Enum.find(set.cards, fn(card) -> 
-              card.id == String.to_integer(id)
-            end) 
-          end)
-          |> Repo.preload(:user)
+      nil -> cards
+      order -> 
+        Map.to_list(order) 
+        |> Enum.map(fn({id, order}) -> {String.to_integer(id), String.to_integer(order)} end)
+        |> List.keysort(1) 
+        |> Enum.reverse
+        |> Enum.map(fn({id, _}) -> Enum.filter(cards, fn(card) -> card.id == id end) end)
+        |> List.flatten
     end
   end
 

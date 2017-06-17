@@ -20,14 +20,16 @@
 
     <div class="row">
       <div class="col s12 m6">
-        <h6>Cards on this set: <span class="right">Order</span></h6>
-        <ul class="collection sortable-existing">
-          <%= for {card, idx} <- Enum.with_index(@existing_cards) do %>
-            <li class="collection-item sortable-cursor sortable-with-icon">
-              <i class="material-icons">drag_handle</i>
+        <h6>Cards on this set: <span class="right">Priority</span></h6>
+        <ul class="collection js-list-existing">
+          <%= for card <- @existing_cards do %>
+            <li class="collection-item with-icon" id="<%= card.id %>">
+              <i class="js-list-remove material-icons blue waves-effect waves-light">remove</i>
               <%= link card.title, to: card_path(@conn, :show, card), target: "_blank" %>
-              <span class="right sortable-order blue white-text"><%= idx + 1 %></span>
-              <%= hidden_input f, :card_ids, name: "set[cards][ids][]", id: "set_cards_id", value: card.id %>
+              <div class="input-field inline right small">
+                <%= number_input f, :card_priorities, id: "priority", class: "blue-text validate small", name: "set[cards][priorities][]", value: @order[to_string(card.id)], required: true, disabled: false, min: 1, max: 999 %>
+              </div>
+              <%= hidden_input f, :card_ids, name: "set[cards][ids][]", id: "cardId", value: card.id %>
             </li>
             <% end %>
         </ul>
@@ -35,13 +37,15 @@
 
       <div class="col s12 m6">
         <h6>Cards Available:</h6>
-        <ul class="collection sortable">
+        <ul class="collection js-list">
           <%= for card <- @cards do %>
-            <li class="collection-item sortable-cursor sortable-with-icon">
-              <i class="material-icons">drag_handle</i>
+            <li class="collection-item with-icon" id="<%= card.id %>">
+              <i class="js-list-add material-icons blue waves-effect waves-light">add</i>
               <%= link card.title, to: card_path(@conn, :show, card), target: "_blank" %>
-              <span class="right sortable-order blue white-text"></span>
-              <%= hidden_input f, :card_ids, name: "set[cards][ids][]", id: "set_cards_id", value: card.id, disabled: true %>
+              <div class="input-field inline right small">
+                  <%= number_input f, :card_priorities, id: "priority" ,class: "blue-text validate small hide", name: "set[cards][priorities][]", value: "", disabled: true, min: 1, max: 999 %>              
+              </div>
+              <%= hidden_input f, :card_ids, name: "set[cards][ids][]", id: "cardId", value: card.id, disabled: true %>
             </li>
           <% end %>
         </ul>

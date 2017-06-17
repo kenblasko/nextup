@@ -10,6 +10,7 @@
                           action: set_path(@conn, :update, @set),
                           cards: @cards,
                           existing_cards: @sorted_cards,
+                          order: @set.order,
                           conn: @conn %>
   <%= link "Delete", 
     to: set_path(@conn, :delete, @set), 

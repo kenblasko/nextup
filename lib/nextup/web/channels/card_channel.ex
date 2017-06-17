@@ -18,11 +18,15 @@ defmodule Nextup.Web.CardChannel do
     {:reply, {:ok, payload}, socket}
   end
 
-  defp save_card(%{assigns: %{card: card_id}} = socket, payload) do
+  defp save_card(%{assigns: %{card: card_id}} = socket, %{"body" => body} = payload) do
     card = Sets.get_card_without_preload!(card_id)
-    case Sets.update_card(card, payload) do
-      {:ok, _card} -> broadcast! socket, "card_saved", payload
-      {:error, _changeset} -> socket
+    unless card.body == body do
+      case Sets.update_card(card, payload) do
+        {:ok, _card} -> broadcast! socket, "card_saved", payload
+        {:error, _changeset} -> socket
+      end
+    else 
+      socket
     end
   end
 

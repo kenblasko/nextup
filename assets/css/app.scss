@@ -35,6 +35,30 @@ textarea.materialize-textarea:focus:not([readonly]) {
     box-shadow: 0 1px 0 0 #1976D2;
 }
 
+.js-list-add,
+.js-list-remove {
+    cursor: pointer;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.input-field.inline input,
+.input-field.inline {
+    &.small {
+        margin: 0;
+    }
+}
+
+.input-field.inline input.small {
+    width: 4rem;
+    height: 2rem;
+    text-align: center;
+}
+
+.input-field.inline.right {
+    margin-left: auto;
+}
+
 $footerHeight: 70px;
 $headerHeightMobile: 56px;
 $headerHeight: 64px;
@@ -80,13 +104,12 @@ $headerHeight: 64px;
     min-height: 50px;
 }
 
-.sortable-with-icon {
+.with-icon {
     display: flex;
     align-items: center;
     line-height: 0 !important;
     i {
-        margin-right: 5px;
-        color: #039BE9;
+        margin-right: 14px;
     }
 }
 
@@ -126,4 +149,29 @@ $headerHeight: 64px;
 
 .section-large {
     padding: 4rem 0;
+}
+
+.modal-content-text {
+    position: relative;
+    z-index: 1;
+    padding: .5rem;
+    box-sizing: border-box;
+    display: none;
+    &.active {
+        display: block;
+    }
+}
+
+.modal-textarea {
+    display: none;
+    &.active {
+        display: block;
+    }
+}
+
+.js-card-submit {
+    display: none;
+    &.active {
+        display: inline-block;
+    }
 }

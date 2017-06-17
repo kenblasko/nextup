@@ -83,7 +83,7 @@ defmodule Nextup.Web.CardController do
       {:ok, card} ->
         conn
         |> put_flash(:info, "Card duplicated successfully.")
-        |> redirect(to: card_path(conn, :show, card))
+        |> redirect(to: card_path(conn, :edit, card))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", card: card, changeset: changeset, vendor: true)
     end

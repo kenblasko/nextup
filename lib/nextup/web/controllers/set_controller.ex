@@ -39,7 +39,8 @@ defmodule Nextup.Web.SetController do
   def show(conn, %{"id" => id}) do
     set = Sets.get_set!(id)
     sorted_cards = Sets.sort_cards(set)
-    render(conn, "show.html", set: set, sorted_cards: sorted_cards)
+    vendor = if conn.assigns[:user], do: true, else: false
+    render(conn, "show.html", set: set, sorted_cards: sorted_cards, vendor: vendor)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -8,6 +8,7 @@ defmodule Nextup.Web.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Nextup.Web.Plugs.SetUser
+    plug :put_user_token
   end
 
   pipeline :api do
@@ -36,4 +37,14 @@ defmodule Nextup.Web.Router do
   # scope "/api", Nextup.Web do
   #   pipe_through :api
   # end
+  
+  defp put_user_token(conn, _) do
+    if user = conn.assigns[:user] do
+      token = Phoenix.Token.sign(conn, "user socket", user.id)
+      assign(conn, :user_token, token)
+    else
+      conn
+    end
+  end
+
 end

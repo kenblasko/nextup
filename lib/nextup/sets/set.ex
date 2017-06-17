@@ -27,7 +27,7 @@ defmodule Nextup.Sets.Set do
     card_priorities = if attrs["cards"]["priorities"], do: attrs["cards"]["priorities"], else: []
 
     set
-      |> cast(attrs, [:title, :body, :user_id])
+      |> cast(attrs, [:title, :body, :user_id, :group_id])
       |> cast(build_order(card_ids, card_priorities), [:order])
       |> put_assoc(:cards, get_cards(card_ids))
       |> validate_required([:title, :body])

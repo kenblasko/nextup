@@ -7,6 +7,8 @@ defmodule Nextup.Sets do
   alias Nextup.Repo
 
   alias Nextup.Sets.Card
+  alias Nextup.Sets.Set
+  alias Nextup.Sets.Group
 
   @doc """
   Returns the list of cards.
@@ -226,7 +228,7 @@ defmodule Nextup.Sets do
       nil -> cards
       order -> 
         Map.to_list(order) 
-        |> Enum.map(fn({id, order}) -> {String.to_integer(id), String.to_integer(order)} end)
+        |> Enum.map(fn({id, priority}) -> {String.to_integer(id), String.to_integer(priority)} end)
         |> List.keysort(1) 
         |> Enum.reverse
         |> Enum.map(fn({id, _}) -> Enum.filter(cards, fn(card) -> card.id == id end) end)
@@ -278,8 +280,9 @@ defmodule Nextup.Sets do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_group(attrs \\ %{}) do
-    %Group{}
+  def create_group(attrs \\ %{}, user) do
+    user
+    |> Ecto.build_assoc(:sets)
     |> Group.changeset(attrs)
     |> Repo.insert()
   end

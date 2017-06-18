@@ -7,5 +7,8 @@
   </div>
 
   <%= render "form.html", changeset: @changeset,
-                        action: group_path(@conn, :create) %>
+                        sets: @sets,
+                        existing_sets: [],
+                        action: group_path(@conn, :create),
+                        conn: @conn %>
 </div>

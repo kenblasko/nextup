@@ -7,6 +7,9 @@
   </div>
 
   <%= render "form.html", changeset: @changeset,
-                        action: group_path(@conn, :update, @group) %>
+                        sets: @sets,
+                        existing_sets: @existing_sets,
+                        action: group_path(@conn, :update, @group),
+                        conn: @conn %>
 
 </div>

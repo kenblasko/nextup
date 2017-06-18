@@ -8,19 +8,21 @@ defmodule Nextup.Web.GroupController do
     render(conn, "index.html", groups: groups)
   end
 
-  def new(conn, _params) do
+  def new(%{assigns: %{user: user}} = conn, _params) do
     changeset = Sets.change_group(%Nextup.Sets.Group{})
-    render(conn, "new.html", changeset: changeset)
+    sets = Sets.list_sets_not_in_group(user)
+    render(conn, "new.html", changeset: changeset, sets: sets, vendor: true)
   end
 
-  def create(conn, %{"group" => group_params}) do
-    case Sets.create_group(group_params) do
+  def create(%{assigns: %{user: user}} = conn, %{"group" => group}) do
+    case Sets.create_group(group, user) do
       {:ok, group} ->
         conn
         |> put_flash(:info, "Group created successfully.")
         |> redirect(to: group_path(conn, :show, group))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        sets = Sets.list_sets_not_in_group(user)
+        render(conn, "new.html", changeset: changeset, sets: sets, vendor: true)
     end
   end
 
@@ -32,7 +34,8 @@ defmodule Nextup.Web.GroupController do
   def edit(conn, %{"id" => id}) do
     group = Sets.get_group!(id)
     changeset = Sets.change_group(group)
-    render(conn, "edit.html", group: group, changeset: changeset)
+    sets = Sets.list_sets_not_in_group(group)
+    render(conn, "edit.html", group: group, changeset: changeset, sets: sets, existing_sets: group.sets, vendor: true)
   end
 
   def update(conn, %{"id" => id, "group" => group_params}) do

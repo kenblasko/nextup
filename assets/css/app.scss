@@ -35,6 +35,25 @@ textarea.materialize-textarea:focus:not([readonly]) {
     box-shadow: 0 1px 0 0 #1976D2;
 }
 
+.btn.disabled,
+.disabled.btn-large,
+.btn-floating.disabled,
+.btn-large.disabled,
+.btn-flat.disabled,
+.btn:disabled,
+.btn-large:disabled,
+.btn-floating:disabled,
+.btn-large:disabled,
+.btn-flat:disabled,
+.btn[disabled],
+[disabled].btn-large,
+.btn-floating[disabled],
+.btn-large[disabled],
+.btn-flat[disabled] {
+    cursor: not-allowed;
+    pointer-events: inherit;
+}
+
 .js-list-add,
 .js-list-remove {
     cursor: pointer;
@@ -79,6 +98,10 @@ $headerHeight: 64px;
 
 .redactor-layer.redactor-styles.redactor-in {
     min-height: 160px !important;
+}
+
+.redactor-box {
+    padding-top: 20px;
 }
 
 .form-right {
@@ -187,4 +210,13 @@ $headerHeight: 64px;
     &.active {
         display: inline-block;
     }
+}
+
+.help-block {
+    text-transform: capitalize;
+    color: #EF9A9A;
+    position: absolute;
+    top: 0;
+    font-size: 12px;
+    right: 0;
 }

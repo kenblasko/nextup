@@ -2,12 +2,16 @@ let list
 
 let existingListElement = document.querySelector('.js-list-existing')
 let listElement = document.querySelector('.js-list')
+let submitBtn = document.querySelector('.js-submit')
+let priorityInputs = document.querySelectorAll('#priority')
+let errorBlock = document.querySelector('.js-error-block')
 
 class List { 
 
     constructor() {
         this.listElement = listElement
         this.existingListElement = existingListElement
+        this.priorityInputElements = Array.from(priorityInputs)
         this.list = Array.from(listElement.children).map(item => item.id)
         this.existingList = Array.from(existingListElement.children).map(item => item.id)
         this.addEvents()
@@ -27,6 +31,12 @@ class List {
                 self.remove(item)
             }
         })
+        this.existingListElement.addEventListener('keyup', function(e) {
+            if (e.code.includes('Digit') && e.target.id === "priority") {
+                self.validate()
+            }
+        })
+
     }
 
     add(item) {
@@ -35,7 +45,6 @@ class List {
         this.listElement.removeChild(item)
         this.mutateElement(item)
         this.existingListElement.appendChild(item)
-        // Handle the plus/minus thing and input
     }
 
     remove(item) {
@@ -59,7 +68,7 @@ class List {
     }
 
     // Add input priority disabled
-    // change + to -
+    // change - to +
     // set input val to null
     restoreElement(item) {
         const icon = item.querySelector('i')
@@ -73,6 +82,25 @@ class List {
     }
 
     validate() {
+        let error = false
+        let inputs = Array.from(this.existingListElement.children).map(i => i.querySelector("#priority"))
+
+        for (let i = 0; i < inputs.length - 1; i++) {
+            let inputVal = inputs[i].value
+            let nextInputVal = inputs[i + 1].value
+            if (inputVal === nextInputVal) {
+                error = true
+                break
+            }
+        }
+
+        if (error) {
+            submitBtn.disabled = "disabled"
+            errorBlock.innerText = "Two cards cannot have the same priority."
+        } else {
+            submitBtn.disabled = ""
+            errorBlock.innerText = ""
+        }
 
     }
 }
@@ -81,4 +109,4 @@ if (existingListElement && listElement) {
     let newList = new List()
 }
 
-export default list;
+export default list

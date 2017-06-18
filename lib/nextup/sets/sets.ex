@@ -128,6 +128,21 @@ defmodule Nextup.Sets do
     Repo.all(Set) |> Repo.preload([:cards, :user])
   end
 
+  def list_sets(%{id: id}) do
+    Set 
+      |> preload([:user, :cards]) 
+      |> where([c], c.user_id == ^id) 
+      |> Repo.all
+  end
+
+  def list_sets_not_in_group(%{id: id}) do
+    Set 
+    |> preload([:user]) 
+    |> where([s], s.user_id == ^id)
+    |> where([s], is_nil(s.group_id))
+    |> Repo.all
+  end
+
   @doc """
   Gets a single set.
 
@@ -210,7 +225,6 @@ defmodule Nextup.Sets do
     Set.changeset(set)
   end
 
-
   def cards_not_in(set \\ %Set{}) do
     user_id = set.user.id
     ids = set.cards |> Enum.map(&(&1.id))
@@ -249,8 +263,8 @@ defmodule Nextup.Sets do
 
   """
   def list_groups do
-    Repo.all(Group)
-  end
+    Repo.all(Group) |> Repo.preload([:sets, :user])
+  end 
 
   @doc """
   Gets a single group.
@@ -266,7 +280,7 @@ defmodule Nextup.Sets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_group!(id), do: Repo.get!(Group, id)
+  def get_group!(id), do: Repo.get!(Group, id) |> Repo.preload([:user, :sets])
 
   @doc """
   Creates a group.
@@ -282,7 +296,7 @@ defmodule Nextup.Sets do
   """
   def create_group(attrs \\ %{}, user) do
     user
-    |> Ecto.build_assoc(:sets)
+    |> Ecto.build_assoc(:groups)
     |> Group.changeset(attrs)
     |> Repo.insert()
   end
@@ -331,6 +345,6 @@ defmodule Nextup.Sets do
 
   """
   def change_group(%Group{} = group) do
-    Group.changeset(group, %{})
+    Group.changeset(group, %{}) 
   end
 end

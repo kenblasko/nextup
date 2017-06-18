@@ -4,55 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="NextUp is a turn tracker application designed for Dungeons & Dungeons for dungeon masters to manage turn based gameplay with ease.">
+    <meta name="author" content="http://kenblasko.me">
     <title>NextUp</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
-
-    <header class="header">
-      <nav role="navigation" class="blue darken-2">
-        <div class="container">
-          <a href="/" class="brand-logo"><i class="material-icons">dialpad</i>nextUp</a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-              <li <%= if @conn.request_path == "/groups" do %>class="active"<% end %>>
-                <%= link "Groups", to: group_path(@conn, :index) %>
-              </li>
-              <li <%= if @conn.request_path == "/sets" do %>class="active"<% end %>>
-                <%= link "Sets", to: set_path(@conn, :index) %>
-              </li>  
-              <li <%= if @conn.request_path == "/cards" do %>class="active"<% end %>>
-                <%= link "Cards", to: card_path(@conn, :index) %>
-              </li>
-            <%= if @conn.assigns[:user] do %>
-              <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
-            <% else %>
-              <li><%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %></li>
-            <% end %>
-          </ul>
-            <ul class="side-nav" id="mobile-demo">
-              <li <%= if @conn.request_path == "/groups" do %>class="active"<% end %>>
-                <%= link "Groups", to: group_path(@conn, :index) %>
-              </li>
-              <li <%= if @conn.request_path == "/sets" do %>class="active"<% end %>>
-                <%= link "Sets", to: set_path(@conn, :index) %>
-              </li>    
-              <li <%= if @conn.request_path == "/cards" do %>class="active"<% end %>>
-                <%= link "Cards", to: card_path(@conn, :index) %>
-              </li>
-            <%= if @conn.assigns[:user] do %>
-              <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
-            <% else %>
-              <li><%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %></li>
-            <% end %>
-            </ul>
-        </div>
-      </nav>
-    </header>
-  
+    
+    <%= render "header.html", conn: @conn %>    
 
     <div class="container">
       <p class="alert card-panel blue lighten-3 white-text" role="alert"><%= get_flash(@conn, :info) %></p>
@@ -63,21 +23,14 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
 
-    <footer class="page-footer blue darken-2">
-      <div class="footer-copyright">
-        <div class="container">
-          © 2017 Copyright Text
-          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
-      </div>
-    </footer>
+    <%= render "footer.html", conn: @conn %>    
 
     <%= if assigns[:user] do %>
       <script>window.userToken = "<%= assigns[:user_token] %>";</script>
     <% end %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-     <%= if assigns[:vendor] do %>
+    <%= if assigns[:vendor] do %>
       <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
     <% end %>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

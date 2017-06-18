@@ -1,0 +1,40 @@
+<header class="header">
+      <nav role="navigation" class="blue darken-2">
+        <div class="container">
+          <a href="/" class="brand-logo"><i class="material-icons">dialpad</i>nextUp</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+              <li <%= if @conn.request_path == "/groups" do %>class="active"<% end %>>
+                <%= link "Groups", to: group_path(@conn, :index) %>
+              </li>
+              <li <%= if @conn.request_path == "/sets" do %>class="active"<% end %>>
+                <%= link "Sets", to: set_path(@conn, :index) %>
+              </li>  
+              <li <%= if @conn.request_path == "/cards" do %>class="active"<% end %>>
+                <%= link "Cards", to: card_path(@conn, :index) %>
+              </li>
+            <%= if @conn.assigns[:user] do %>
+              <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
+            <% else %>
+              <li><%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %></li>
+            <% end %>
+          </ul>
+            <ul class="side-nav" id="mobile-demo">
+              <li <%= if @conn.request_path == "/groups" do %>class="active"<% end %>>
+                <%= link "Groups", to: group_path(@conn, :index) %>
+              </li>
+              <li <%= if @conn.request_path == "/sets" do %>class="active"<% end %>>
+                <%= link "Sets", to: set_path(@conn, :index) %>
+              </li>    
+              <li <%= if @conn.request_path == "/cards" do %>class="active"<% end %>>
+                <%= link "Cards", to: card_path(@conn, :index) %>
+              </li>
+            <%= if @conn.assigns[:user] do %>
+              <li><%= link "Logout", to: auth_path(@conn, :logout), class: "btn blue lighten-1 waves-effect waves-light" %><li>
+            <% else %>
+              <li><%= link "Login", to: auth_path(@conn, :request, "facebook"), class: "btn blue waves-effect waves-light" %></li>
+            <% end %>
+            </ul>
+        </div>
+      </nav>
+    </header>

@@ -102,6 +102,9 @@ $headerHeight: 64px;
 .sortable,
 .sortable-existing {
     min-height: 50px;
+    .collection-item {
+        cursor: move;
+    }
 }
 
 .with-icon {
@@ -125,6 +128,16 @@ $headerHeight: 64px;
     justify-content: center;
     &:empty {
         display: none;
+    }
+}
+
+.sortable-with-icon {
+    display: flex;
+    align-items: center;
+    line-height: 0 !important;
+    i {
+        margin-right: 5px;
+        color: #039BE9;
     }
 }
 

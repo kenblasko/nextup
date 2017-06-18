@@ -9,11 +9,13 @@
   <div class="input-field">
     <%= text_input f, :title %>
     <%= label f, :title, class: "active" %>
+    <%= error_tag f, :title %>
   </div>
 
   <div class="input-field">
     <%= text_input f, :body %>
     <%= label f, :body, class: "active" %>
+    <%= error_tag f, :body %>
   </div>
 
   <div class="input-field">
@@ -33,6 +35,7 @@
             </li>
             <% end %>
         </ul>
+        <div class="js-error-block alert card-panel red lighten-3 white-text"></div>
       </div>
 
       <div class="col s12 m6">
@@ -55,7 +58,7 @@
   </div>
 
   <div class="input-field">
-    <%= submit "Submit", class: "btn blue" %>
+    <%= submit "Submit", class: "js-submit btn blue" %>
   </div>
 
 <% end %>

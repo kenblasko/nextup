@@ -46,7 +46,7 @@
               <i class="js-list-add material-icons blue waves-effect waves-light">add</i>
               <%= link card.title, to: card_path(@conn, :show, card), target: "_blank" %>
               <div class="input-field inline right small">
-                  <%= number_input f, :card_priorities, id: "priority" ,class: "blue-text validate small hide", name: "set[cards][priorities][]", value: "", disabled: true, min: 1, max: 999 %>              
+                  <%= number_input f, :card_priorities, id: "priority" ,class: "blue-text validate small hide", name: "set[cards][priorities][]", value: "", required: true, disabled: true, min: 1, max: 999 %>              
               </div>
               <%= hidden_input f, :card_ids, name: "set[cards][ids][]", id: "cardId", value: card.id, disabled: true %>
             </li>

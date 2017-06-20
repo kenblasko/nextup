@@ -14,7 +14,7 @@ defmodule Nextup.Sets.Group do
     field :title, :string
 
     belongs_to :user, User
-    has_many :sets, Set, on_replace: :nilify
+    has_many :sets, Set, on_delete: :nilify_all, on_replace: :nilify
 
     timestamps()
   end

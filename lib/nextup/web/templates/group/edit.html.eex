@@ -12,4 +12,10 @@
                         action: group_path(@conn, :update, @group),
                         conn: @conn %>
 
+  <%= link "Delete", 
+    to: group_path(@conn, :delete, @group), 
+    method: :delete, 
+    data: [confirm: "Are you sure?"], 
+    class: "btn red lighten-2 form-right" %>
+
 </div>

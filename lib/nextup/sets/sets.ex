@@ -238,7 +238,7 @@ defmodule Nextup.Sets do
   def sort_cards(set) do
     cards = set.cards |> Repo.preload(:user)
     order = set.order
-    case order do
+    case check_order(order) do
       nil -> cards
       order -> 
         Map.to_list(order) 
@@ -250,6 +250,14 @@ defmodule Nextup.Sets do
     end
   end
 
+  # Make sure order does not have an empty string
+  defp check_order(order) do
+    case order |> Enum.to_list |> Enum.any?(fn({_, priority}) -> priority !== "" end) do
+      nil -> nil
+      false -> nil
+      true -> order
+    end
+  end
 
   alias Nextup.Sets.Group
 

@@ -11,11 +11,11 @@ defmodule Nextup.Web.AuthController do
         conn
           |> put_flash(:info, "Welcome back, #{name}!")
           |> put_session(:user_id, user.id)
-          |> redirect(to: page_path(conn, :index))
+          |> redirect(to: set_path(conn, :index))
       {:error, _reason} -> 
          conn
           |> put_flash(:error, "Error signing in.")
-          |> redirect(to: page_path(conn, :index))
+          |> redirect(to: set_path(conn, :index))
     end
   end
 
@@ -23,7 +23,7 @@ defmodule Nextup.Web.AuthController do
     conn
       |> configure_session(drop: true)
       |> put_flash(:info, "Logged out.")
-      |> redirect(to: page_path(conn, :index))
+      |> redirect(to: set_path(conn, :index))
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, %{"provider" => provider} = _params) do

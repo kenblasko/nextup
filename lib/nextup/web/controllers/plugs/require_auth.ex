@@ -13,7 +13,7 @@ defmodule Nextup.Web.Plugs.RequireAuth do
     else
       conn 
       |> put_flash(:error, "Not Authorized")
-      |> redirect(to: Helpers.page_path(conn, :index))
+      |> redirect(to: Helpers.set_path(conn, :index))
       |> halt()
     end
   end
